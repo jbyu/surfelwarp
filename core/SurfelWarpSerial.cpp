@@ -14,13 +14,13 @@
 #include <fstream>
 #include <pcl/common/time.h>
 
-
-surfelwarp::SurfelWarpSerial::SurfelWarpSerial() {
+surfelwarp::SurfelWarpSerial::SurfelWarpSerial(const surfelwarp::FetchInterface::Ptr &fetcher)
+{
 	//The config is assumed to be updated
 	const auto& config = ConfigParser::Instance();
 	
 	//Construct the image processor
-	FileFetch::Ptr fetcher = std::make_shared<FileFetch>(config.data_path());
+	//FileFetch::Ptr fetcher = std::make_shared<FileFetch>(config.data_path());
 	m_image_processor = std::make_shared<ImageProcessor>(fetcher);
 	
 	//Construct the holder for surfel geometry
@@ -280,6 +280,13 @@ void surfelwarp::SurfelWarpSerial::ProcessNextFrameWithReinit(bool offline_save)
 			m_camera.GetWorld2CameraEigen(), m_camera.GetInitWorld2CameraEigen(),
 			save_dir, with_recent
 		);
+	}
+	else {
+		const auto with_recent = draw_recent || use_reinit;
+		const auto num_fused_vertex = m_surfel_geometry[fused_geometry_idx]->NumValidSurfels();
+		//m_renderer->SaveLiveNormalMap(num_fused_vertex, fused_geometry_idx, m_frame_idx, m_camera.GetWorld2CameraEigen(), "", with_recent);
+		//m_renderer->SaveLiveAlbedoMap(num_fused_vertex, fused_geometry_idx, m_frame_idx, m_camera.GetWorld2CameraEigen(), "", with_recent);
+		m_renderer->SaveLivePhongMap(num_fused_vertex, fused_geometry_idx, m_frame_idx, m_camera.GetWorld2CameraEigen(), "", with_recent);
 	}
 	
 	//Update the index

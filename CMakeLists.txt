@@ -22,8 +22,16 @@ if(WIN32)
     set(OpenCV_DIR "C:/Developer/ShareLib/opencv_gpu_world/")
 
     # GLFW
-    include("C:/Developer/ShareLib/GLFW/lib/cmake/glfw3/glfw3Config.cmake")
-    include_directories("C:/Developer/ShareLib/GLFW/include")
+    #include("C:/Developer/ShareLib/GLFW/lib/cmake/glfw3/glfw3Config.cmake")
+    #include_directories("C:/Developer/ShareLib/GLFW/include")
+	find_package(glfw3 REQUIRED)
+	include_directories(${GLFW3_INCLUDE_DIR})
+	
+	#set(XXX C:/_ThirdParty/glew-2.1.0)
+	#set(CMAKE_PREFIX_PATH ${XXX})
+	#set(CMAKE_LIBRARY_PATH "${XXX}/lib/Release/x64")
+	#find_package(glew REQUIRED)
+	#include_directories(${GLEW_INCLUDE_DIRS})
 endif(WIN32)
 
 # The library and compiler flags on Ubuntu
@@ -34,7 +42,7 @@ if(UNIX)
 
     # GLFW package
     find_package(GLFW REQUIRED)
-    include_directories(${GLFW_INCLUDE_DIR})
+    include_directories(${GLFW3_INCLUDE_DIR})
 endif(UNIX)
 
 # Do not use the system Eigen
@@ -66,6 +74,7 @@ if(${CUDA_VERSION_MAJOR} LESS 11)
     endforeach()
 endif()
 
+set(OpenCV_DIR "C:/_ThirdParty/opencv341/build")
 # OpenCV lib: this version uses the customized build
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIR})

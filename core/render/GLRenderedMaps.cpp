@@ -336,6 +336,7 @@ void surfelwarp::GLOfflineVisualizationFrameRenderBufferObjects::release() {
 
 
 void surfelwarp::GLOfflineVisualizationFrameRenderBufferObjects::save(const std::string &path) {
+	if (0 == path.size()) return;
 	//Bind the render buffer object
 	glBindRenderbuffer(GL_RENDERBUFFER, normalized_rgba_rbo);
 	

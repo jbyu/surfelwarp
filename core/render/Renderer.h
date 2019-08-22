@@ -5,7 +5,7 @@
 #pragma once
 
 #include "core/render/glad/glad.h"
-#define GLFW_INCLUDE_NONE
+//#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 //Cuda headers
@@ -75,6 +75,7 @@ namespace surfelwarp {
 		void MapSurfelGeometryToCuda(int idx, cudaStream_t stream = 0);
 		void UnmapSurfelGeometryFromCuda(int idx, cudaStream_t stream = 0);
 		
+		GLFWwindow* GetWindow() { return mGLFWwindow; }
 
 		/* The buffer for rendered maps
 		 */

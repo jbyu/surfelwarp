@@ -186,8 +186,8 @@ void surfelwarp::ImageProcessor::releaseFetchBuffer()
 void surfelwarp::ImageProcessor::FetchFrame(size_t frame_idx)
 {
 	FetchDepthImage(frame_idx);
-	FetchRGBImage(frame_idx);
 	FetchRGBPrevFrame(frame_idx);
+	FetchRGBImage(frame_idx);
 }
 
 void surfelwarp::ImageProcessor::FetchDepthImage(size_t frame_idx)

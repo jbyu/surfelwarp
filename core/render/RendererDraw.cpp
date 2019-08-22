@@ -188,7 +188,9 @@ void surfelwarp::Renderer::drawVisualizationMap(
 	glBindVertexArray(geometry_vao);
 
 	//The size is image rows/cols
-	glBindFramebuffer(GL_FRAMEBUFFER, m_visualization_draw_buffers.visualization_map_fbo);
+	//glBindFramebuffer(GL_FRAMEBUFFER, m_visualization_draw_buffers.visualization_map_fbo);
+	float4 intrinsic = m_renderer_intrinsic;
+	intrinsic.w = -intrinsic.w;
 	glViewport(0, 0, m_image_width, m_image_height);
 
 	//Clear the render buffer object
@@ -197,7 +199,7 @@ void surfelwarp::Renderer::drawVisualizationMap(
 
 	//Set uniform values
 	shader.SetUniformMatrix("world2camera", world2camera);
-	shader.SetUniformVector("intrinsic", m_renderer_intrinsic);
+	shader.SetUniformVector("intrinsic", intrinsic);
 	
 	//The current time of the solver maps
 	const float4 width_height_maxdepth_currtime = make_float4(m_width_height_maxdepth.x, m_width_height_maxdepth.y, m_width_height_maxdepth.z, current_time);

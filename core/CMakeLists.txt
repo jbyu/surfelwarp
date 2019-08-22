@@ -24,5 +24,5 @@ endif(UNIX)
 
 #On windows, the glfw lib is built separately
 if(WIN32)
-    target_link_libraries(core_lib glfw)
+    target_link_libraries(core_lib ${GLFW3_LIBRARY})
 endif(WIN32)

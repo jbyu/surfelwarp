@@ -64,7 +64,8 @@ namespace surfelwarp {
 		
 	public:
 		using Ptr = std::shared_ptr<SurfelWarpSerial>;
-		SurfelWarpSerial();
+		//SurfelWarpSerial();
+		SurfelWarpSerial(const FetchInterface::Ptr &fetcher);
 		~SurfelWarpSerial();
 		SURFELWARP_NO_COPY_ASSIGN_MOVE(SurfelWarpSerial);
 		
@@ -80,6 +81,8 @@ namespace surfelwarp {
 		void TestSolverWithRigidTransform();
 		void TestRigidSolver();
 		void TestPerformance();
+
+		GLFWwindow* GetWindow() { return m_renderer->GetWindow(); }
 
 		EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 		
